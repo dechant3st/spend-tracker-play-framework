@@ -1,0 +1,23 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index()
+
+# Spend list
+GET     /spend                      controllers.HomeController.list(request: Request, p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+
+# Add a spending
+GET     /spend/new                  controllers.HomeController.create(request: Request)
+POST    /spend                      controllers.HomeController.save(request: Request)
+
+# Update a spending
+GET     /spend/:id                  controllers.HomeController.edit(request: Request, id:Long)
+POST    /spend/:id                  controllers.HomeController.update(request: Request, id:Long)
+
+# Delete a spending
+POST    /spend/:id/delete           controllers.HomeController.delete(id:Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

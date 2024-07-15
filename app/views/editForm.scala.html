@@ -1,0 +1,41 @@
+@(id: Long, spendForm: Form[Spend])(implicit request: Http.Request, messages: play.i18n.Messages)
+
+@import helper._
+
+@implicitField: FieldConstructor = @{ FieldConstructor(tags.forms.field_constructor.render) }
+
+@main("Edit spending") {
+
+    <h1 class="my-3" id="page-title">Edit spending</h1>
+
+    @form(routes.HomeController.update(id)) {
+        @CSRF.formField
+        <div class="row">
+            <div class="col-md-3 mb-3">
+            @inputText(spendForm("name"), Symbol("_label") -> "Spending name", Symbol("_help") -> "")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+            @inputDate(spendForm("spentDate"), Symbol("_label") -> "Spending date", Symbol("_help") -> "")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+            @inputText(spendForm("spentValue"), Symbol("_label") -> "Spending value", Symbol("_help") -> "")
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-success" type="submit">Save this spending</button>
+            <span class="mx-2">or</span>
+            <a href="@routes.HomeController.list()" id="add" class="btn btn-light" role="button">Cancel</a>
+        </div>
+    }
+
+    @form(routes.HomeController.delete(id), Symbol("class") -> "top-right") {
+        @CSRF.formField
+        <button class="btn btn-danger" type="submit">Delete this computer</button>
+    }
+
+}
